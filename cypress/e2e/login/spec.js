@@ -37,7 +37,9 @@ class LoginForm {
   }
 
   verifyMsgFeitoPserFacil() {
-    this.elements.msgFeitoPserFacil().should("contain", "Feito para ser .");
+    this.elements
+      .msgFeitoPserFacil()
+      .should("contain", "Feito para ser dificil.");
   }
 
   virifyLogo() {
