@@ -1,13 +1,13 @@
 class LoginForm {
   elements = {
-    msgFeitoPserFacil: () => cy.get('span.fadeInLeft'),
-    logo: () => cy.get('a.logo img'),
+    msgFeitoPserFacil: () => cy.get("span.fadeInLeft"),
+    logo: () => cy.get("a.logo img"),
     loginInput: () => cy.get("#loginform-username"),
     loginFeedback: () => cy.get(".help-block.help-block-error"),
     senhaInput: () => cy.get("#loginform-password"),
     senhaFeedback: () => cy.get(".help-block.help-block-error"),
     btnEntrar: () => cy.get('button[name="login-button"]'),
-    userInvalidFeedback: () => cy.get('.help-block.help-block-error')
+    userInvalidFeedback: () => cy.get(".help-block.help-block-error"),
   };
 
   typeLogin(text) {
@@ -36,43 +36,41 @@ class LoginForm {
       .should("contain", "“Senha” não pode ficar em branco.");
   }
 
-  verifyMsgFeitoPserFacil(){
-    this.elements.msgFeitoPserFacil()
-    .should("contain", "Feito para ser fácil.")
+  verifyMsgFeitoPserFacil() {
+    this.elements.msgFeitoPserFacil().should("contain", "Feito para ser .");
   }
-  
-  virifyLogo(){
-    this.elements.logo().should('be.visible')  
-    .and('have.attr', 'src', '/images/logo_titulo_cinza.png'); 
+
+  virifyLogo() {
+    this.elements
+      .logo()
+      .should("be.visible")
+      .and("have.attr", "src", "/images/logo_titulo_cinza.png");
   }
 
   verifyUserInvalidFeedback() {
     this.elements
       .userInvalidFeedback()
       .should("contain", "Verifique o usuário/senha e tente novamente.");
-  }  
+  }
 }
 
 const loginFormInstance = new LoginForm();
 
 describe("Verificação da mensagem de boas-vindas na tela de login", () => {
   describe("Cenário: Exibição da mensagem Feito para ser fácil. na tela de login", () => {
-    
     it("Dado que estou na página de login,", () => {
       cy.visit("/");
     });
 
     it(`Eu devo ver o texto "Feito para ser fácil." exibido na tela de login,`, () => {
-     loginFormInstance.verifyMsgFeitoPserFacil();
+      loginFormInstance.verifyMsgFeitoPserFacil();
     });
 
     it(`Eu devo ver a logo da EasyDots exibida na tela de login,`, () => {
       loginFormInstance.virifyLogo();
-     });
-
+    });
   });
 });
-
 
 describe("Validação de login com campos obrigatórios", () => {
   describe("Cenário: Tentativa de login com campos vazios", () => {
@@ -107,7 +105,6 @@ describe("Validação de login com campos obrigatórios", () => {
   });
 });
 
-
 describe("Validação de login com credenciais inválidas", () => {
   describe("Cenário: Login com usuário inválido e senha incorreta", () => {
     const input = {
@@ -134,7 +131,6 @@ describe("Validação de login com credenciais inválidas", () => {
     it('E eu devo ver a mensagem "Verifique o usuário/senha e tente novamente." abaixo do input de senha,', () => {
       loginFormInstance.verifyUserInvalidFeedback();
     });
-
   });
 });
 
@@ -160,8 +156,5 @@ describe("Validação de login com credenciais inválidas", () => {
     it('Quando eu clico no botão "Entrar",', () => {
       loginFormInstance.clickEntrar();
     });
-
-  
-
   });
 });
